@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 /**
- * Fetching image and name of shows from tvmaze api fillted by their name
+ * Fetching image and name of shows fillted by their name
  * 
  * @returns Shows information
  */
@@ -69,7 +69,7 @@ router.get('/', async (req, res) => {
 });
 
 /**
- * Fetching shows names from tvmaze api for autocomplete.
+ * Fetching shows names for autocomplete.
  * 
  * @returns Best 5 options, based on their score in tvmaze
  */
