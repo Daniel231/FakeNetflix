@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 3000;
 const app = express();
+const showsRoute = require('./routes/shows');
 
 // Requiring dotenv package for using environment variables from .env file while development
 require("dotenv").config()
@@ -10,9 +11,8 @@ require("dotenv").config()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Dummy root api for init commit
-app.use('/', (req, res) => {
-    res.send("Sup my brother from another mother?!")
-});
+// Routing for the shows api
+app.use('/shows', showsRoute);
 
+// Running the app on specified port with express.
 app.listen(port, () => console.log(`Listening on port ${port}`));
