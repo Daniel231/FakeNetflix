@@ -5,6 +5,7 @@
  */
 
 const axios = require("axios");
+const config = require('../config/config');
 
 /**
  * Fetch show data from tvmaze api fillted by their name.

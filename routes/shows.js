@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { getShowsInfo } = require('../core/TVMaze');
 
 /**
  * Fetching image and name of shows fillted by their name
@@ -8,6 +9,7 @@ const router = express.Router();
  */
 router.get('/', async (req, res) => {
     try {
+        // const showName = req.query.search;
         res.status(200).send([{
             "id": 525,
             "url": "http://www.tvmaze.com/shows/525/gilmore-girls",
@@ -75,7 +77,24 @@ router.get('/', async (req, res) => {
  */
 router.get('/autocomplete', async (req, res) => {
     try {
-        res.status(200).send([{"name": "Gilmore Girls","image":"http://static.tvmaze.com/uploads/images/medium_portrait/4/11308.jpg"}])
+        const searchShowName = req.query.search;
+
+        // Getting shows data from tvmaze api
+        let shows = await getShowsInfo(searchShowName);
+
+        // Check if there is any matching results
+        if(shows.data.length === 0) {
+            res.status(404).send("No results was found");
+            return;
+        }
+
+        // Taking first 5 shows to get 5 best options, cause we can see that tvmaze sort the array by their score
+        shows = shows.slice(0, 5)
+        
+        // Running on the shows and save only the their names.
+        const showsNames = shows.data.map(show => show.show.name);
+        
+        res.status(200).send(showsNames);
     } catch(err) {
         res.status(500).send(`Failed while trying to get autocomplete options for shows names. ${err.message}`);
     }
