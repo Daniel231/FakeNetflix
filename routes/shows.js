@@ -51,7 +51,7 @@ router.get('/autocomplete', async (req, res) => {
         shows = shows.data.slice(0, 5)
         
         // Running on the shows and save only the their names.
-        const showsNames = shows.map(show => show.show.name);
+        const showsNames = shows.map(show => ({name: show.show.name}));
         
         res.status(200).send(showsNames);
     } catch(err) {
