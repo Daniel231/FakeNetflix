@@ -1,0 +1,19 @@
+{
+  "name": "fakenetflix_backend",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "git@gitlab.com:Daniel231/fake-netflix-backend.git",
+  "author": "Daniel231",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
+}
